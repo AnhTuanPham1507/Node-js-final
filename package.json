@@ -1,0 +1,4 @@
+"scripts":{
+	"install":cd 29-10-2020 && npm i",
+	"start" : "node 29-10-2020/test.js"
+}
