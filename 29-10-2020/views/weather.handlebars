@@ -1,12 +1,19 @@
-<h1 style="color:cyan">Thời tiết tại : {{cityName}}</h1>
+
+<h1 style="color:cyan">Thời tiết tại : {{title}}</h1>
+
 {{#if err}}
 <p style="color:red"> Error : {{err}}</p>
 {{/if}}
 
 {{#if weathers}}
-	<ul>
+<div style="display:flex,margin:-4px">
 		{{#each weathers}}
-			<li>thời tiết ngày : {{this.applicable_date}} : {{this.weather_state_name}}</li>
+			<div style="flex:1;text-align:center;padding:8px;margin:4px;">
+				<strong>{{this.applicable_date}}</strong>  
+				<img width="75%" src="https://www.metaweather.com/static/img/weather/png/{{this.weather_state_abbr}}.png">
+				<div>{{this.weather_state_name}}</div>
+				<div>{{this.minTemp}}-{{this.maxTemp}}</div>
+			</div>
 		{{/each}}
-	</ul>
+</div>
 {{/if}}

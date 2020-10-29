@@ -16,12 +16,13 @@ function getLocations(CityName,callBack){
 function getWeather(woeid,callBack)
 {
 	request(`https://www.metaweather.com/api/location/${woeid}/`,{json:true},(err,res,body)=>{
-		try{
-			 callBack(null,body.consolidated_weather)
+		if(body.detail==='Not found.'){
+			callBack("đừng nghịch url nha em",undefined,undefined)
 		}
-		catch(err)
+		else
 		{
-			callBack(err,undefined)
+			callBack(null,body.consolidated_weather,body.title)
+			console.log(body)
 		}
 	})
 }
@@ -40,9 +41,8 @@ app.get('/',(req,res,err)=>{
 })
 app.get('/weather/:woeid',(req,res,err)=>{
 	const woeid = req.params.woeid
-	const cityName = req.query.cityName
-	getWeather(woeid,(err,weathers)=>{
-		res.render("weather",{err,weathers,cityName});
+	getWeather(woeid,(err,weathers,title)=>{
+		res.render("weather",{err,weathers,title});
 	})
 })
 app.listen(port,()=>{
