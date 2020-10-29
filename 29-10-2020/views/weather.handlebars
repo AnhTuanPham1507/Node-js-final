@@ -1,0 +1,12 @@
+<h1 style="color:cyan">Thời tiết tại : {{cityName}}</h1>
+{{#if err}}
+<p style="color:red"> Error : {{err}}</p>
+{{/if}}
+
+{{#if weathers}}
+	<ul>
+		{{#each weathers}}
+			<li>thời tiết ngày : {{this.applicable_date}} : {{this.weather_state_name}}</li>
+		{{/each}}
+	</ul>
+{{/if}}

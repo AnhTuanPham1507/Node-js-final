@@ -1,0 +1,22 @@
+<h1 style="color:cyan">Weather App</h1>
+<form style="display:flex">
+	<input name="location" placeholder="input location" value="{{searchText}}">
+	<button type="submit">search</button>
+</form>
+
+{{#if searchText}}
+<p > Bạn đang search {{searchText}}</p>
+{{/if}}
+
+{{#if error}}
+<p style="color:red"> Error : {{error}}</p>
+{{/if}}
+
+{{#if locations}}
+	<ul>
+		{{#each locations}}
+			<li> <a href="/weather/{{this.woeid}}/?cityName={{this.title}}"> {{this.title}} </a> </li>
+		{{/each}}
+	</ul>
+{{/if}}
+
