@@ -2,7 +2,7 @@ const express = require('express');
 const request = require('request');
 const expressHandleBars = require('express-handlebars');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 function getLocations(CityName,callBack){
 	request(`https://www.metaweather.com/api/location/search/?query=${CityName}`,{json:true},(err,res,body)=>{
 			if(body.length===0)
