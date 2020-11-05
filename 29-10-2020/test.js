@@ -1,8 +1,9 @@
 const express = require('express');
 const request = require('request');
 const expressHandleBars = require('express-handlebars');
+const path = require('path')
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 function getLocations(CityName,callBack){
 	request(`https://www.metaweather.com/api/location/search/?query=${CityName}`,{json:true},(err,res,body)=>{
 			if(body.length===0)
@@ -28,7 +29,8 @@ function getWeather(woeid,callBack)
 }
 app.engine("handlebars",expressHandleBars())
 app.set("view engine","handlebars");
-app.get('/',(req,res,err)=>{
+app.set("views",path.join(__dirname,"views"))
+;app.get('/',(req,res,err)=>{
 	const searchText = req.query.location;
 	if(!searchText){
 		res.render("home",{searchText})
